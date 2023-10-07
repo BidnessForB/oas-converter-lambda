@@ -91,8 +91,17 @@ console.log("Here: 1");
   oas30 = await converter.convert({
     from: params.inputAPIType,
       to: params.outputAPIType,
-    source: apispec,
+  syntax: params.outputFileFormat,
+    source: apispec
   });
+  console.log("Here: 8");
+if(params.outputFileFormat == 'yaml' || params.outputFileFormat == 'yml') {
+    oas30.spec = (jsyaml.dump(oas30.spec));
+    console.log("Here: 9");
+ }
+ console.log("Here: 10", oas30);
+ oas30.b64 = Buffer.from(JSON.stringify(oas30.spec)).toString('base64');
+ console.log("Here: 11");
   }
   catch(error) {
     console.log(error);
@@ -101,6 +110,7 @@ console.log("Here: 1");
       body: error
     };
   }
+
         return {
           statusCode: 200,
           body: oas30
