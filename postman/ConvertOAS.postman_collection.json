@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "21d189ac-7fa9-4a26-ae61-01f1c8846427",
+		"_postman_id": "56957206-2ba4-4f65-afe0-968733ab8fb7",
 		"name": "Convert OAS 2.0 to OAS 3.0",
-		"description": "Converts OAS 2.0 API definitions to OAS 3.0, creating either completely new APIs with OAS 3.0 schema files, or adding a new OAS 3.0 schema file to the existing API. The collection can operate on a single API in a workspace, or all the APIs in a workspace.\n\nYAML and JSON specifications are supported. The new schema file uses the same file format as the source schema file.\n\nThe collections, environments and source code for the Lambda converter function are hosted in [GitHub](https://github.com/BidnessForB/oas-converter-lambda).\n\n## Limitations\n\n- Accepts only OAS 2.0 input schema files.\n- Only processes APIs with a single schema file\n- Supports OAS 3.0 output only\n- Error checking and parameter/schema validation are rudimentary\n- Git-linked APIs are not supported\n    \n\n## Overview\n\nGiven an API, the collection collects the schema file and submits to an AWS Lambda function, which handles the conversion between OAS 2.0 and OAS 3.0. The function returns the OAS 3.0 schema, and the collection then either creates a brand new API in the workspace with the new schema file, or appends the new files as a schema file to the source API.\n\nNew API names are comprised of the old API name with `-3.0` append:\n\n`my-api` -> `my-api-3.0`\n\nNew API schema files follow a smilar naming convention:\n\n`index.yaml` -> `index-OAS3.0.yaml`\n\n## Configuration\n\nThe collection uses the `Convert OAS 2.0 to OAS 3.0` environment. Be sure to fork this environment into your workspace when you fork the collection. Variables set at runtime have the prefix `rt_`. Variables that can be modified before running the collection are prefixed with `cfg_`. The `rt_APIIDs` variable is an exception as it can be set manually for single API operation. Othewise it is set runtime when running the collection against a workspace.\n\nInspect and set the following values in the `Convert OAS 2.0 to OAS 3.0` environment:\n\n| **Variable** | **Values** | **Description** |\n| --- | --- | --- |\n| `cfg_OASConverterUrl` | URL | A URL for the Lambda conversion service (or any other conversion service). |\n| `cfg_workspaceId` | String | A valid workspace ID. The Postman API Key in use will need Write permission on this workspace. |\n| `cfg_pmanAPIKey` | String | A valid Postman API Key. |\n| `cfg_createNewAPI` | `true`, `false` | \\- `true` New APIs will be created  <br>\\- `false` New API Schema files will be appended to the source APIs |\n| `cfg_outputFileFormat` | `json`, `yaml` |  |\n| `cfg_outputAPIType` | `openapi_3` | Currently only OAS 3.0 is supported |\n| `rt_APIIDs` | An array of API IDs | Set for single API operation:  <br>`'[\"\"]` |\n\n## Operation\n\n### Single API mode\n\n1. Set the `rt_APIIDs`variable to a JSON array with API ID for an API present in the workspace specified by `cfg_workspaceId`.\n    \n2. Run the `Single API` folder only.\n    \n\n### Workspace Mode\n\nRun the entire collection.",
+		"description": "Converts OAS 2.0 API definitions to OAS 3.0, creating either completely new APIs with OAS 3.0 schema files, or adding a new OAS 3.0 schema file to the existing API. The collection can operate on a single API in a workspace, or all the APIs in a workspace.\n\nYAML and JSON specifications are supported. The new schema file uses the same file format as the source schema file.\n\nThe collections, environments and source code for the Lambda converter function are hosted in [GitHub](https://github.com/BidnessForB/oas-converter-lambda).\n\n## Limitations\n\n- Accepts only OAS 2.0 input schema files.\n- Only processes APIs with a single schema file\n- Supports OAS 3.0 output only\n- Error checking and parameter/schema validation are rudimentary\n- Git-linked APIs are not supported\n    \n\n## Overview\n\nGiven an API, the collection collects the schema file and submits to an AWS Lambda function, which handles the conversion between OAS 2.0 and OAS 3.0. The function returns the OAS 3.0 schema, and the collection then either creates a brand new API in the workspace with the new schema file, or appends the new files as a schema file to the source API.\n\nNew API names are comprised of the old API name with `-3.0` append:\n\n`my-api` -> `my-api-3.0`\n\nNew API schema files follow a smilar naming convention:\n\n`index.yaml` -> `index-OAS3.0.yaml`\n\n## Configuration\n\nThe collection uses the `Convert OAS 2.0 to OAS 3.0` environment. Be sure to fork this environment into your workspace when you fork the collection. Variables set at runtime have the prefix `rt_`. Variables that can be modified before running the collection are prefixed with `cfg_`. The `rt_APIIDs` variable is an exception as it can be set manually for single API operation. Othewise it is set runtime when running the collection against a workspace.\n\nInspect and set the following values in the `Convert OAS 2.0 to OAS 3.0` environment:\n\n| **Variable** | **Values** | **Description** |\n| --- | --- | --- |\n| `cfg_OASConverterUrl` | URL | A URL for the Lambda conversion service (or any other conversion service). |\n| `cfg_workspaceId` | String | A valid workspace ID. The Postman API Key in use will need Write permission on this workspace. |\n| `cfg_pmanAPIKey` | String | A valid Postman API Key. |\n| `cfg_createNewAPI` | `true`, `false` | \\- `true` New APIs will be created  <br>\\- `false` New API Schema files will be appended to the source APIs |\n| `cfg_outputFileFormat` | `json`, `yaml` |  |\n| `cfg_outputAPIType` | `openapi_3` | Currently only OAS 3.0 is supported |\n| `cfg_apiNameFilter` | valid nodejs regular expression pattern. the `gi` flags will be added | Filter to select only matching API names |\n| `rt_APIIDs` | An array of API IDs | Set for single API operation:  <br>`'[\"\"]` |\n\n## Operation\n\n### Single API mode\n\n1. Set the `rt_APIIDs`variable to a JSON array with API ID for an API present in the workspace specified by `cfg_workspaceId`.\n2. Run the `Single API` folder only.\n    \n\n### Workspace Mode\n\nRun the entire collection.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23889826",
-		"_collection_link": "https://v10-technical-enablement.postman.co/workspace/b300ef5a-6cf8-4295-9712-0cfecc414f50/collection/23889826-21d189ac-7fa9-4a26-ae61-01f1c8846427?action=share&source=collection_link&creator=23889826"
+		"_collection_link": "https://v10-technical-enablement.postman.co/workspace/OAS-Conversion~7d5d64e7-2720-4e8c-9dbf-8429b5514f84/collection/23889826-56957206-2ba4-4f65-afe0-968733ab8fb7?action=share&source=collection_link&creator=23889826"
 	},
 	"item": [
 		{
@@ -52,12 +52,41 @@
 								"exec": [
 									"//const apis = pm.response.json().workspace.workspace.apis;",
 									"//console.log(pm.response.json().workspace.apis);",
-									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"const apis = pm.response.json().workspace.apis;",
 									"let apiids = [];",
-									"apis.forEach((api) => {",
-									"    apiids.push(api.id);",
-									"})",
+									"",
+									"    //const regex = new RegExp(/^OAS20(-yaml|-yml|-json|!*)$/g);",
+									"    try {",
+									"        var regex = new RegExp(pm.environment.get('cfg_APINameFilter'),'gi');",
+									"        console.log(\"Regex: \", regex);",
+									"pm.test(\"cfg_APINameFilter is a valid regular expression\", function () {",
+									"             // This test is designed to fail",
+									"            pm.expect(1 + 1).to.equal(2, \"'\" + pm.environment.get('cfg_APINameFilter') + \"' is a valid regular expression\" ); // This assertion will fail",
+									"            });",
+									"",
+									"    apis.forEach((api) => {",
+									"        ",
+									"        if(regex.test(api.name)) {",
+									"            console.log(\"API name match: \", api.name);",
+									"            apiids.push(api.id);",
+									"        }",
+									"        else {",
+									"            //console.log(\"API name mismatch, skipping\");",
+									"        }    ",
+									"    })",
+									"",
+									"    }",
+									"    catch(error) {",
+									"        console.log(\"Invalid regex for cfg_APINameFilter.\");",
+									"        pm.test(\"cfg_APINameFilter is a valid regular expression\", function () {",
+									"             // This test is designed to fail",
+									"            pm.expect(1 + 1).to.equal(3, \"'\" + pm.environment.get('cfg_APINameFilter') + \"' is not a valid regular expression\" ); // This assertion will fail",
+									"            });",
+									"        postman.setNextRequest(null);",
+									"    }",
 									"pm.environment.set('rt_APIIDs',JSON.stringify(apiids));",
 									""
 								],
@@ -344,11 +373,22 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const regex = new RegExp(pm.environment.get('cfg_APINameFilter'),'gi');",
 									"const json = pm.response.json();",
-									"pm.environment.set('rt_schemaId', json.schemas[0].id)",
-									"pm.environment.set('rt_apiName', json.name);",
-									"pm.environment.set('rt_apiDescription', json.description);",
-									"pm.environment.set('rt_apiSummary', json.summary);",
+									"if(!regex.test(json.name)) {",
+									"    console.log('Name mismatch, skipping');",
+									"    postman.setNextRequest('Get API');",
+									"}",
+									"else {",
+									"    pm.environment.set('rt_schemaId', json.schemas[0].id)",
+									"    pm.environment.set('rt_apiName', json.name);",
+									"    pm.environment.set('rt_apiDescription', json.description);",
+									"    pm.environment.set('rt_apiSummary', json.summary);",
+									"}",
 									""
 								],
 								"type": "text/javascript"
@@ -358,8 +398,20 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"",
+									"try {",
 									"var apiIds = JSON.parse(pm.environment.get('rt_APIIDs'));",
 									"console.log(apiIds);",
+									"}",
+									"catch(err) {",
+									"    console.log(\"Error parsing apiIds.  Check that environment is set\");",
+									"    pm.test(\"Unable to parse rt_APIIDs\", function () {",
+									"             // This test is designed to fail",
+									"            pm.expect(1 + 1).to.equal(2, \"Correct environment is selected\" ); // This assertion will fail",
+									"            });",
+									"    postman.setNextRequest(null);",
+									"",
+									"}",
 									"",
 									"if(typeof apiIds !== 'undefined' && apiIds.length > 0) {",
 									"    var apiId = apiIds.pop();",
@@ -661,6 +713,9 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"const path = require('path');",
 									"let filePath = pm.response.json().files[0].name",
 									"let filePath30 = filePath.replaceAll(/\\./g, \"-OAS3.0.\")",
@@ -1011,6 +1066,9 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"pm.environment.set('rt_sourceSchema', JSON.parse(JSON.stringify((pm.response.json().content))));",
 									"pm.environment.set('rt_sourceSchema-string', JSON.stringify((pm.response.json().content)));",
 									"",
@@ -1378,6 +1436,9 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
 									"const json = pm.response.json();",
 									"//console.log(json.b64);",
 									"var oas30schema = \"\";",
@@ -1411,7 +1472,7 @@
 									"let sourceSchema = pm.environment.get('rt_sourceSchema');",
 									"//console.log(\"Source schema: \", sourceSchema);",
 									"let sourceSchema64 = Buffer.from(sourceSchema).toString('base64');",
-									"//console.log(sourceSchema64);",
+									"console.log(sourceSchema64);",
 									"pm.environment.set('rt_sourceSchema64',sourceSchema64);",
 									""
 								],
@@ -1463,12 +1524,114 @@
 					"response": []
 				},
 				{
+					"name": "ConvertOAS2To3 Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const json = pm.response.json();",
+									"//console.log(json.b64);",
+									"var oas30schema = \"\";",
+									"if(pm.environment.get('cfg_outputFileFormat') == 'yaml' || pm.environment.get('cfg_outputFileFormat') == 'yml')",
+									"{",
+									"    oas30schema = Buffer.from(json.b64,'base64').toString('utf-8');",
+									"}",
+									"else {",
+									"    oas30schema = JSON.stringify(json.spec);",
+									"}",
+									"",
+									"let oas30schemaString = \"\";",
+									"oas30schemaString = oas30schema.replaceAll(/\\n/g, \"\\\\n\");",
+									"oas30schemaString = oas30schema.replaceAll(/\\\"/g, \"\\\\\\\"\");",
+									"console.log(oas30schemaString);",
+									"pm.environment.set('rt_targetSchema', oas30schema);",
+									"pm.environment.set('rt_targetSchema-string',oas30schemaString)",
+									"",
+									"if(pm.environment.get('cfg_createNewAPI') == 'false') {",
+									"    postman.setNextRequest(\"Add 3.0 Schema\")",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let sourceSchema = pm.environment.get('rt_sourceSchema');",
+									"//console.log(\"Source schema: \", sourceSchema);",
+									"let sourceSchema64 = Buffer.from(sourceSchema).toString('base64');",
+									"console.log(sourceSchema64);",
+									"pm.environment.set('rt_sourceSchema64',sourceSchema64);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"b64\":\"{{rt_sourceSchema64}}\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://eaa7painas5mlef3tqy6md4t3m0kgoto.lambda-url.us-east-2.on.aws/?outputFileFormat={{rt_sourceFileFormat}}&inputFileFormat={{rt_sourceFileFormat}}&inputAPIType=swagger_2&outputAPIType={{cfg_outputAPIType}}",
+							"protocol": "https",
+							"host": [
+								"eaa7painas5mlef3tqy6md4t3m0kgoto",
+								"lambda-url",
+								"us-east-2",
+								"on",
+								"aws"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "outputFileFormat",
+									"value": "{{rt_sourceFileFormat}}"
+								},
+								{
+									"key": "inputFileFormat",
+									"value": "{{rt_sourceFileFormat}}"
+								},
+								{
+									"key": "inputAPIType",
+									"value": "swagger_2"
+								},
+								{
+									"key": "outputAPIType",
+									"value": "{{cfg_outputAPIType}}"
+								}
+							]
+						},
+						"description": "Sends the source OAS file to a Lambda function at `cfg_OASConverterUrl` for conversion:\n\n#### Parameters\n\n**outputAPIType**: The OAS version to convert the source to is specified in the `cfg_outputAPIType` variable. Currently only `openapi_3` is supported."
+					},
+					"response": []
+				},
+				{
 					"name": "Create 3.0 API",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
 									"pm.environment.set(\"rt_targetAPIID\", pm.response.json().id);"
 								],
 								"type": "text/javascript"
@@ -1755,6 +1918,9 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
 									"const apiIds = JSON.parse(pm.environment.get('rt_APIIDs'));",
 									"if(apiIds.length > 0) {",
 									"    postman.setNextRequest(\"Get API\");",
@@ -2274,6 +2440,9 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
 									"const apiIds = JSON.parse(pm.environment.get('rt_APIIDs'));",
 									"if(apiIds.length > 0) {",
 									"    postman.setNextRequest(\"Get API\");",
