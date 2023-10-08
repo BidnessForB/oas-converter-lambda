@@ -1,4 +1,4 @@
-// lambda.js
+// Lambda event handler for converting OAS 2.0 -> OAS 3.0 API definitions
 
 const AWS = require('aws-sdk');
 const query = require('querystring');
