@@ -39,7 +39,6 @@ exports.handler = async (event) => {
 // or to the default `json` if the parameter is invalid or missing
  
     if(typeof params === 'undefined' || params == null) {
-      console.log("Here: 4");
       params = {};
       params.outputFileFormat = 'yaml'
       params.inputFileFormat = 'json'
@@ -73,12 +72,12 @@ exports.handler = async (event) => {
     // YAML schemas require transformation to JSON before processing
     var b64 = JSON.parse(event.body).b64
     if(params.inputFileFormat == 'yaml' || params.inputFileFormat == 'yml') {
-      console.log("Transforming YAML")
-      console.log("b64", JSON.parse(event.body).b64);
+      
+      
       apispec = Buffer.from(b64,'base64').toString('utf-8');
       var yamlData = jsyaml.load(apispec);
       apispec = JSON.parse(JSON.stringify((yamlData)));
-      console.log("Transforming YAML COMPLETE")
+      
     }
     else {
       // JSCN schemas can just be decoded
@@ -92,11 +91,10 @@ exports.handler = async (event) => {
       to: params.outputAPIType,
   syntax: params.outputFileFormat,
     source: apispec
-  });
-  console.log("Here: 8");
+  })
 if(params.outputFileFormat == 'yaml' || params.outputFileFormat == 'yml') {
     oas30.spec = (jsyaml.dump(oas30.spec));
-    console.log("Here: 9");
+  
  }
  // base64 encoded the generated spec
  oas30.b64 = Buffer.from(JSON.stringify(oas30.spec)).toString('base64');
@@ -104,15 +102,23 @@ if(params.outputFileFormat == 'yaml' || params.outputFileFormat == 'yml') {
   }
   catch(error) {
     //rut roh
+    
     console.log(error);
+    if(error.message == 'object [object Object] is not valid swagger_2') {
+      error.message = 'Spec is not a valid OAS 2.0 definition'
+    }
     return {
       statusCode: 500,
-      body: error
+      body: {"error":error.message},
+      
     };
   }
   // Deliver the goods
-        return {
+          oas30.error = "";
+          return {
           statusCode: 200,
-          body: oas30
+          
+          body: oas30,
+      
         };
       };
